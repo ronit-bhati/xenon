@@ -29,6 +29,7 @@ def start():
     import webbrowser
     import os
     import random
+    import pywhatkit as kit
 
     engine = pyttsx3.init('sapi5')
     voices = engine.getProperty('voices')
@@ -76,7 +77,6 @@ def start():
             output_screen.update()
 
         except Exception as e:
-            print("Say that again please...")
             output_screen.insert(3.0, 'Say that again please...\n')
             output_screen.update()
             return "None"
@@ -100,9 +100,19 @@ def start():
                 output_screen.update()
                 speak(results)
 
+            elif 'google' in query:
+                speak("Searching on Google...")
+                query = query.replace("google", "")
+                kit.search(query)
+
             elif 'open youtube' in query:
                 speak("Opening Youtube...")
                 webbrowser.open("youtube.com")
+
+            elif 'play' in query:
+                speak("Playing on YouTube...")
+                query = query.replace("play", "")
+                kit.playonyt(query)
 
             elif 'open google' in query:
                 speak("Opening Google...")
