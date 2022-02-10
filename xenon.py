@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import time
+import subprocess
 
 root = Tk()
 root.title("XENON")
@@ -100,6 +101,10 @@ def start():
                 output_screen.update()
                 speak(results)
 
+            elif 'open google' in query:
+                speak("Opening Google...")
+                webbrowser.open("google.com")
+
             elif 'google' in query:
                 speak("Searching on Google...")
                 query = query.replace("google", "")
@@ -113,10 +118,6 @@ def start():
                 speak("Playing on YouTube...")
                 query = query.replace("play", "")
                 kit.playonyt(query)
-
-            elif 'open google' in query:
-                speak("Opening Google...")
-                webbrowser.open("google.com")
 
             elif 'open twitter' in query:
                 speak("Opening Twitter...")
@@ -146,31 +147,17 @@ def start():
                 speak("Opening Quora.com...")
                 webbrowser.open("quora.com")
 
-            elif 'play music' in query:
-                speak("Playing Music...")
-                music_dir = 'C:\\Users\\ASUS\\Music'
-                songs = os.listdir(music_dir)
-                randSong = random.randint(1, len(songs))
-                os.startfile(os.path.join(music_dir, songs[randSong]))
-
             elif 'the time' in query:
                 strTime = datetime.datetime.now().strftime("%H:%M:%S")
                 speak(f"The time is {strTime}")
 
-            elif 'open vs code' in query:
-                speak("Opening Vs Code")
-                codePath = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-                os.startfile(codePath)
+            elif 'open notepad' in query:
+                speak("Opening notepad")
+                subprocess.call('notepad.exe')
 
-            elif 'open opera' in query:
-                speak("Opening opera browser")
-                operaPath = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Opera\\launcher.exe"
-                os.startfile(operaPath)
-
-            elif 'open spotify' in query:
-                speak("Opening spotify")
-                spotifyPath = "C:\\Users\\ASUS\\AppData\\Roaming\\Spotify\\Spotify.exe"
-                os.startfile(spotifyPath)
+            elif 'open calculator' in query:
+                speak("Opening calculator")
+                subprocess.call('calc.exe')
 
             elif 'open powerpoint' in query:
                 speak("Opening powerpoint")
