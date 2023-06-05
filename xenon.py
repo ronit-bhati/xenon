@@ -21,6 +21,7 @@ heading.place(x=200, y=10)
 sub_heading = Label(root, text="The most advanced virtual assistant", font="lucida 15 bold", fg="white", bg="#181818")
 sub_heading.place(x=125, y=70)
 
+
 def start():
     global output_screen
     import pyttsx3
@@ -36,28 +37,25 @@ def start():
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[0].id)
 
-
     def speak(audio):
         global output_screen
         engine.say(audio)
         engine.runAndWait()
 
-
     def wishMe():
         global output_screen
         hour = int(datetime.datetime.now().hour)
 
-        if hour >= 0 and hour < 12:
+        if 0 <= hour < 12:
             speak("Good Morning!")
 
-        elif hour >= 12 and hour < 17:
+        elif 12 <= hour < 17:
             speak("Good afternoon")
 
         else:
             speak("Good evening")
 
         speak("I am Xenon! Please tell how may i help you")
-
 
     def takeCommand():
         global output_screen
@@ -83,14 +81,13 @@ def start():
             return "None"
         return query
 
-
     if __name__ == "__main__":
         wishMe()
         while True:
             query = takeCommand().lower()
 
             if 'wikipedia' in query:
-                speak("Searching Wikipedia...")                
+                speak("Searching Wikipedia...")
                 output_screen.delete(1.0, END)
                 output_screen.insert(4.0, 'Searching Wikipedia...\n')
                 output_screen.update()
@@ -178,7 +175,8 @@ def start():
                 speak("Thanks for asking, i am fine!")
 
             elif 'you do' in query:
-                speak("I can open web for you or can make a wikipedia search. I can also play music or open     some apps on your pc")
+                speak(
+                    "I can open web for you or can make a wikipedia search. I can also play music or open     some apps on your pc")
 
             elif 'name' in query:
                 speak("I think i already mentioned it, but anyways, my name is xenon")
@@ -225,12 +223,15 @@ def start():
             else:
                 speak("")
 
+
 logo_run = ImageTk.PhotoImage(Image.open("run.png"))
 run = Button(root, image=logo_run, relief=RIDGE, command=start, width=100, height=50)
 run.place(x=240, y=115)
 
+
 def exit_it():
     root.destroy()
+
 
 quit_func = Button(root, text="Stop", command=exit_it, bg='#181818', fg="white")
 quit_func.place(x=280, y=190)
